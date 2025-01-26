@@ -79,7 +79,7 @@
          
                          
         <nav> 
-            <div class="movingobj" id="nav">
+            <div class="moving" id="nav">
            <marquee beahavior="alternate" style=" font-style: italic;" id="moving"> 
              <ul>
              <b>  
@@ -115,7 +115,7 @@
         <input placeholder="Phone  number" type="number" id="phone" required><br >
    </section>
      <section id="objective">
-    <lebel class=" Resume"> objective </lebel> <hr>
+    <label class=" Resume"> objective </label> <hr>
     <textarea  for="objective" placeholder="your_objective" rows="5"></textarea>
     </section>
     <section id="experience"> 
@@ -123,19 +123,19 @@
     <textarea  for="details" placeholder="experience" rows="5" ></textarea> 
     </section>
     <section id="education">
-        <lebel class=" Resume"> Education</lebel> <hr>
+        <label class=" Resume"> Education</label> <hr>
          <textarea  for=" Education" placeholder="your education" rows="5"></textarea>
     </section>
     <section id="skills">
-   <lebel  class=" Resume">  technical skills </lebel> <hr>
+   <label  class=" Resume">  technical skills </label> <hr>
    <textarea  for=" skills " placeholder="your technical skills" rows="5"></textarea>
      </section> 
-      <section id="projects" ><lebel class=" Resume">  Projects </lebel> <hr>
+      <section id="projects" ><label class=" Resume">  Projects </label> <hr>
    <textarea  for=" Projects" placeholder="your  Projects" rows="5"></textarea></section> 
-   <section id="Achievements" > <lebel class=" Resume"> Achievements</lebel> <hr>
+   <section id="Achievements" > <label class=" Resume"> Achievements</label> <hr>
     <textarea  for=" Achievements" rows="5" placeholder="Achievements" ></textarea>   </section> 
     <section id="Additional_details"  >
-      <lebel class=" Resume">Additional_details</lebel> <hr>
+      <label class=" Resume">Additional_details</label> <hr>
      <textarea  for="Additional_details" placeholder="Additional_details " rows="5"></textarea></section>     
     <button type="button"  onclick="generateResume()">Generate Resume</button>
     <br>   <button type="button"  onclick="downloadPDF()">Download PDF</button>
@@ -181,25 +181,24 @@
   
   <script>
     function generateResume() {
-      // Get values from form
+      
       const name = document.getElementById('name').value;
       const photo = document.getElementById('photo').value;
       const email = document.getElementById('email').value;
       const phone = document.getElementById('phone').value;
-      const project = document.getElementById('projects').value;
+      const projects = document.getElementById('projects').value;
       const experience = document.getElementById('experience').value;
       const education = document.getElementById('education').value;
       const skills = document.getElementById('skills').value;
       const  objective = document.getElementById('objective').value;
       const  Additional_details = document.getElementById('Additional_details').value;
       
-
-      // Set values in the preview section
+ 
       document.getElementById('preview-name').textContent = name;
       document.getElementById('preview-photo').textContent = photo;
       document.getElementById('preview-email').textContent = email;
       document.getElementById('preview-phone').textContent = phone;
-      document.getElementById('preview-project').textContent = project;
+      document.getElementById('preview-projects').textContent = projects;
       document.getElementById('preview-experience').textContent = experience;
       document.getElementById('preview-education').textContent = education;
       document.getElementById('preview-skills').textContent = skills;
