@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume building project</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="script" href="resume.js">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    </head>
+<body>
+     <style>
+         *{
+    margin: 0%;
+    padding: 0%;
+    color: black;
+}
+ 
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+       display: contents; 
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      background-color: #f4f4f9;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .container {
+      display: flex;
+      gap: 20px;
+      width: 100%;
+      max-width: 1200px;
+    }
+    form, .resume-preview {
+      flex: 1;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    input, textarea, select, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .resume-preview {
+      padding: 20px;
+    }
+    .resume-preview h2 {
+      text-align: center;
+    }
+    .resume-section {
+      margin-bottom: 15px;
+    }
+    .label {
+      font-weight: bold;
+    }
+    </style> 
+    <header>
+        <h1>My Resume</h1>
+         
+                         
+        <nav> 
+            <div class="movingobj" id="nav">
+           <marquee beahavior="alternate" style=" font-style: italic;" id="moving"> 
+             <ul>
+             <b>  
+                <a style="color: blue;" href="#Introduction"  >Introduction</a> 
+                <a style="color: blue;" href="#photo"  >photo</a> 
+                 <a style="color: blue;" href="#objective">Objective</a> 
+                   <a style="color: blue;" href="#experience">  Experince  </a>
+                 <a style="color: blue;" href="#education">  Education </a>
+                 <a style="color: blue;" href="#skills" >Skills</a>            
+                 <a style="color: blue;" href="#projects">Projects</a> 
+                   <a style="color: blue;" href="#Achievements">  Achievements  </a>
+                 <a style="color: blue;" href="#Additional_details">Additional details</a>
+                  </b>
+                 </ul>
+               </marquee> 
+              </div>
+        </nav>
+    </header>
+    <br >
+    <hr>
+    <main>     
+   <form class="intro" >   
+        <div id="Resume"> 
+ <section id="introduction">
+      <h2 > Introduction</h2><hr>
+    <label for="name">Full name</label><br >
+        <input placeholder="your name" type="text" id="name" required><br >
+        <label for="photo">photo</label><br >
+        <input placeholder="your photo" type="file" id="photo" required><br >
+        <label for="Email">Email id</label><br >
+        <input placeholder="email" type="email" id="email" required><br >
+        <label for="number">Phone number </label><br >
+        <input placeholder="Phone  number" type="number" id="phone" required><br >
+   </section>
+     <section id="objective">
+    <lebel class=" Resume"> objective </lebel> <hr>
+    <textarea  for="objective" placeholder="your_objective" rows="5"></textarea>
+    </section>
+    <section id="experience"> 
+    <label  class=" Resume" >  experience </label><br> <hr>
+    <textarea  for="details" placeholder="experience" rows="5" ></textarea> 
+    </section>
+    <section id="education">
+        <lebel class=" Resume"> Education</lebel> <hr>
+         <textarea  for=" Education" placeholder="your education" rows="5"></textarea>
+    </section>
+    <section id="skills">
+   <lebel  class=" Resume">  technical skills </lebel> <hr>
+   <textarea  for=" skills " placeholder="your technical skills" rows="5"></textarea>
+     </section> 
+      <section id="projects" ><lebel class=" Resume">  Projects </lebel> <hr>
+   <textarea  for=" Projects" placeholder="your  Projects" rows="5"></textarea></section> 
+   <section id="Achievements" > <lebel class=" Resume"> Achievements</lebel> <hr>
+    <textarea  for=" Achievements" rows="5" placeholder="Achievements" ></textarea>   </section> 
+    <section id="Additional_details"  >
+      <lebel class=" Resume">Additional_details</lebel> <hr>
+     <textarea  for="Additional_details" placeholder="Additional_details " rows="5"></textarea></section>     
+    <button type="button"  onclick="generateResume()">Generate Resume</button>
+    <br>   <button type="button"  onclick="downloadPDF()">Download PDF</button>
+     </div>
+ </form><hr>
+ <main> 
+  <div class="resume-preview" id="resume-content">
+    <h2><u>Live Preview</u></h2>
+    <div class="resume-section">
+      <span class="label">Name:</span> <span id="preview-name"></span>
+    </div>
+    <div class="resume-section">
+      <span class="label">Photo:</span> <span id="preview-photo"></span>
+    </div>
+    <div class="resume-section">
+      <span class="label">Email:</span> <span id="preview-email"></span>
+    </div>
+    <div class="resume-section">
+      <span class="label">Phone:</span> <span id="preview-phone"></span>
+    </div><hr>
+    <div class="resume-section">
+        <span class="label">objective:</span> <span id="preview-objective"></span>
+      </div><hr>
+    <div class="resume-section">
+      <span class="label">Experience:</span> <span id="preview-experience"></span>
+    </div><hr>
+    <div class="resume-section">
+      <span class="label">Education:</span> <span id="preview-education"></span>
+    </div><hr>
+    <div class="resume-section">
+      <span class="label">Skills:</span> <span id="preview-skills"></span>
+    </div><hr>
+     <div class="resume-section">
+        <span class="label"> Projects:</span> <span id="preview-projects"></span>
+      </div><hr>
+      <div class="resume-section">
+        <span class="label">Achievements :</span> <span id="preview-Achievements"></span>
+      </div><hr>
+      <div class="resume-section">
+        <span class="label"> Additional_details :</span> <span id="preview-Additional_details"></span>
+      </div><hr>       
+  </div>
+  
+  <script>
+    function generateResume() {
+      // Get values from form
+      const name = document.getElementById('name').value;
+      const photo = document.getElementById('photo').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const project = document.getElementById('projects').value;
+      const experience = document.getElementById('experience').value;
+      const education = document.getElementById('education').value;
+      const skills = document.getElementById('skills').value;
+      const  objective = document.getElementById('objective').value;
+      const  Additional_details = document.getElementById('Additional_details').value;
+      
+
+      // Set values in the preview section
+      document.getElementById('preview-name').textContent = name;
+      document.getElementById('preview-photo').textContent = photo;
+      document.getElementById('preview-email').textContent = email;
+      document.getElementById('preview-phone').textContent = phone;
+      document.getElementById('preview-project').textContent = project;
+      document.getElementById('preview-experience').textContent = experience;
+      document.getElementById('preview-education').textContent = education;
+      document.getElementById('preview-skills').textContent = skills;
+      document.getElementById('preview-Additional_details').textContent = Additional_details ;
+      document.getElementById('preview-objective').textContent = objective;
+      
+    }
+
+    async function downloadPDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      // Get content from the preview section
+      const content = document.getElementById('resume-content').innerText;
+
+      // Add content to the PDF
+      doc.text(content, 10, 10);
+
+      // Save the PDF
+      doc.save("resume.pdf");
+    }
+  </script>
+</main>
+    
+</body>
+</html>
