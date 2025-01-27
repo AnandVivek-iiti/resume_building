@@ -257,11 +257,10 @@ textarea {
     const achievements = document.getElementById('achievements').value;
     const additionalDetails = document.getElementById('additional_details').value;
 
-    // Preview the data
     document.getElementById('preview-name').textContent = name;
-    document.getElementById('preview-email').textContent = email;
-    document.getElementById('preview-phone').textContent = phone;
-    document.getElementById('preview-objective').textContent = objective;
+      document.getElementById('preview-email').textContent = email;
+       document.getElementById('preview-phone').textContent = phone;
+      document.getElementById('preview-objective').textContent = objective;
     document.getElementById('preview-experience').textContent = experience;
     document.getElementById('preview-education').textContent = education;
     document.getElementById('preview-skills').textContent = skills;
@@ -269,7 +268,7 @@ textarea {
     document.getElementById('preview-achievements').textContent = achievements;
     document.getElementById('preview-additional-details').textContent = additionalDetails;
 
-    // Handle photo preview
+    
     const photoInput = document.getElementById('photo');
     const photoPreview = document.getElementById('preview-photo');
     const reader = new FileReader();
@@ -291,12 +290,12 @@ async function downloadPDF() {
 
     const resumeElement = document.getElementById('resume-content');
 
-    // Use html2canvas to capture the resume content
+  
     const canvas = await html2canvas(resumeElement, { scale: 2 });
 
     const imgData = canvas.toDataURL('image/png');
 
-    // Calculate dimensions to fit the A4 page
+   
     const pdfWidth = pdf.internal.pageSize.getWidth();
     const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
@@ -316,7 +315,5 @@ async function downloadPDF() {
     <textarea id="experience"></textarea>
 </div>
  
-<!-- Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore vero ex, repellat veritatis ab neque nulla earum sunt, expedita ipsam modi repellendus veniam voluptatibus doloremque saepe quo molestiae beatae tempora. -->
-
 </body>
 </html>
