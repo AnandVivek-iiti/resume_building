@@ -3,225 +3,320 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume building project</title>
-
-    <link rel="stylesheet" href="style.css">
-    <link rel="script" href="resume.js">
+    <title>Resume Builder</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    </head>
-<body>
-     <style>
-         *{
-    margin: 0%;
-    padding: 0%;
-    color: black;
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="resumesheet" href="resume.js">
+
+    <style>
+        * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
- 
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-       display: contents; 
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
-      background-color: #f4f4f9;
-    }
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .container {
-      display: flex;
-      gap: 20px;
-      width: 100%;
-      max-width: 1200px;
-    }
-    form, .resume-preview {
-      flex: 1;
-      padding: 20px;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    input, textarea, select, button {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    button {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
-    .resume-preview {
-      padding: 20px;
-    }
-    .resume-preview h2 {
-      text-align: center;
-    }
-    .resume-section {
-      margin-bottom: 15px;
-    }
-    .label {
-      font-weight: bold;
-    }
-    </style> 
-    <header>
-        <h1>My Resume</h1>
-         
-                         
-        <nav> 
-            <div class="moving" id="nav">
-           <marquee beahavior="alternate" style=" font-style: italic;" id="moving"> 
-             <ul>
-             <b>  
-                <a style="color: blue;" href="#Introduction"  >Introduction</a> 
-                <a style="color: blue;" href="#photo"  >photo</a> 
-                 <a style="color: blue;" href="#objective">Objective</a> 
-                   <a style="color: blue;" href="#experience">  Experince  </a>
-                 <a style="color: blue;" href="#education">  Education </a>
-                 <a style="color: blue;" href="#skills" >Skills</a>            
-                 <a style="color: blue;" href="#projects">Projects</a> 
-                   <a style="color: blue;" href="#Achievements">  Achievements  </a>
-                 <a style="color: blue;" href="#Additional_details">Additional details</a>
-                  </b>
-                 </ul>
-               </marquee> 
-              </div>
-        </nav>
-    </header>
-    <br >
-    <hr>
-    <main>     
-   <form class="intro" >   
-        <div id="Resume"> 
- <section id="introduction">
-      <h2 > Introduction</h2><hr>
-    <label for="name">Full name</label><br >
-        <input placeholder="your name" type="text" id="name" required><br >
-        <label for="photo">photo</label><br >
-        <input placeholder="your photo" type="file" id="photo" required><br >
-        <label for="Email">Email id</label><br >
-        <input placeholder="email" type="email" id="email" required><br >
-        <label for="number">Phone number </label><br >
-        <input placeholder="Phone  number" type="number" id="phone" required><br >
-   </section>
-     <section id="objective">
-    <label class=" Resume"> objective </label> <hr>
-    <textarea  for="objective" placeholder="your_objective" rows="5"></textarea>
-    </section>
-    <section id="experience"> 
-    <label  class=" Resume" >  experience </label><br> <hr>
-    <textarea  for="details" placeholder="experience" rows="5" ></textarea> 
-    </section>
-    <section id="education">
-        <label class=" Resume"> Education</label> <hr>
-         <textarea  for=" Education" placeholder="your education" rows="5"></textarea>
-    </section>
-    <section id="skills">
-   <label  class=" Resume">  technical skills </label> <hr>
-   <textarea  for=" skills " placeholder="your technical skills" rows="5"></textarea>
-     </section> 
-      <section id="projects" ><label class=" Resume">  Projects </label> <hr>
-   <textarea  for=" Projects" placeholder="your  Projects" rows="5"></textarea></section> 
-   <section id="Achievements" > <label class=" Resume"> Achievements</label> <hr>
-    <textarea  for=" Achievements" rows="5" placeholder="Achievements" ></textarea>   </section> 
-    <section id="Additional_details"  >
-      <label class=" Resume">Additional_details</label> <hr>
-     <textarea  for="Additional_details" placeholder="Additional_details " rows="5"></textarea></section>     
-    <button type="button"  onclick="generateResume()">Generate Resume</button>
-    <br>   <button type="button"  onclick="downloadPDF()">Download PDF</button>
-     </div>
- </form><hr>
- <main> 
-  <div class="resume-preview" id="resume-content">
-    <h2><u>Live Preview</u></h2>
-    <div class="resume-section">
-      <span class="label">Name:</span> <span id="preview-name"></span>
-    </div>
-    <div class="resume-section">
-      <span class="label">Photo:</span> <span id="preview-photo"></span>
-    </div>
-    <div class="resume-section">
-      <span class="label">Email:</span> <span id="preview-email"></span>
-    </div>
-    <div class="resume-section">
-      <span class="label">Phone:</span> <span id="preview-phone"></span>
-    </div><hr>
-    <div class="resume-section">
-        <span class="label">objective:</span> <span id="preview-objective"></span>
-      </div><hr>
-    <div class="resume-section">
-      <span class="label">Experience:</span> <span id="preview-experience"></span>
-    </div><hr>
-    <div class="resume-section">
-      <span class="label">Education:</span> <span id="preview-education"></span>
-    </div><hr>
-    <div class="resume-section">
-      <span class="label">Skills:</span> <span id="preview-skills"></span>
-    </div><hr>
-     <div class="resume-section">
-        <span class="label"> Projects:</span> <span id="preview-projects"></span>
-      </div><hr>
-      <div class="resume-section">
-        <span class="label">Achievements :</span> <span id="preview-Achievements"></span>
-      </div><hr>
-      <div class="resume-section">
-        <span class="label"> Additional_details :</span> <span id="preview-Additional_details"></span>
-      </div><hr>       
-  </div>
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f4f4f9;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+h1 {
+  color: #333;
+  margin-bottom: 30px;
+  font-size: 36px;
+}
+nav {
+  width: 100%;
   
-  <script>
-    function generateResume() {
-      
-      const name = document.getElementById('name').value;
-      const photo = document.getElementById('photo').value;
-      const email = document.getElementById('email').value;
-      const phone = document.getElementById('phone').value;
-      const projects = document.getElementById('projects').value;
-      const experience = document.getElementById('experience').value;
-      const education = document.getElementById('education').value;
-      const skills = document.getElementById('skills').value;
-      const  objective = document.getElementById('objective').value;
-      const  Additional_details = document.getElementById('Additional_details').value;
-      
- 
-      document.getElementById('preview-name').textContent = name;
-      document.getElementById('preview-photo').textContent = photo;
-      document.getElementById('preview-email').textContent = email;
-      document.getElementById('preview-phone').textContent = phone;
-      document.getElementById('preview-projects').textContent = projects;
-      document.getElementById('preview-experience').textContent = experience;
-      document.getElementById('preview-education').textContent = education;
-      document.getElementById('preview-skills').textContent = skills;
-      document.getElementById('preview-Additional_details').textContent = Additional_details ;
-      document.getElementById('preview-objective').textContent = objective;
-      
-    }
+  background-color: #007bff;
+  padding: 10px 0;
+}
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 18px;
+}
+nav a:hover {
+  text-decoration: underline;
+}
 
-    async function downloadPDF() {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
+.container {
+  display: flex;
+  gap: 20px;
+  max-width: 1200px;
+  width: 100%;
+  justify-content: space-between;
+}
+.form-container, .resume-preview {
+  flex: 1;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.form-container input, .form-container textarea, .form-container button {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+.form-container textarea {
+  resize: vertical;
+}
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+button:hover {
+  background-color: #0056b3;
+}
+.resume-preview {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+}
+.resume-preview h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+.resume-preview {
+background-color: #e9f2ff;
+}
 
-      // Get content from the preview section
-      const content = document.getElementById('resume-content').innerText;
+.resume-section {
+  margin-bottom: 15px;
+}
+.resume-section .label {
+  font-weight: bold;
+}
+.resume-preview img {
+  max-width: 100px;
+  max-height: 100px;
+  border-radius: 10%;
+   object-fit: cover;
+}
+hr {
+  margin: 20px 0;
+  border: 1px solid #ccc;
+}
+.form-container label {
+font-weight: bold;
+margin-bottom: 5px;
+}
 
-      // Add content to the PDF
-      doc.text(content, 10, 10);
+.form-container input, .form-container textarea {
+margin-bottom: 15px;
+}
+input:invalid {
+border: 2px solid red;
+}
 
-      // Save the PDF
-      doc.save("resume.pdf");
-    }
-  </script>
+input:valid {
+border: 2px solid green;
+}
+html {
+scroll-behavior: smooth;
+}
+button {
+transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+background-color: #0056b3;
+transform: scale(1.05);
+}
+textarea {
+   font-family: Arial, Helvetica, sans-serif;
+   font-size: medium;
+ }
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    gap: 10px;
+  }
+  nav a {
+    font-size: 14px;
+  }
+}
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>My Resume</h1>
+    <nav>
+        <a href="#introduction">Introduction</a>
+        <a href="#photo">Photo</a>
+        <a href="#objective">Objective</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#achievements">Achievements</a>
+        <a href="#additional_details">Additional Details</a>
+    </nav>
+</header>
+
+<main class="container">
+    <!-- Form for Resume Details -->
+    <div class="form-container">
+        <form id="resume-form">
+            <section id="introduction">
+                <h2>Introduction</h2>
+                 <label for="name">Full Name:</label>
+                <input type="text" id="name" placeholder="Your Name" required>
+                <label for="photo">
+                    <span style="margin-right: 10px;">📸</span>photo
+                </label>
+                <input type="file" id="photo" accept="image/*" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="Your Email" required pattern=".+@.+\..+" title="Enter a valid email (e.g., user@example.com)">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" placeholder="Your Phone Number" required pattern="\d{10}" title="Enter a 10-digit phone number">
+             <h2>Objective</h2>
+                <textarea id="objective"  placeholder="Objective " rows="4" required></textarea>
+             <h2>Experience</h2>
+                <textarea id="experience" placeholder="Your Experience" rows="4" required></textarea>
+               <h2>Education</h2>
+                <textarea id="education" placeholder="Your Education  " rows="4" required></textarea>
+                <h2>Skills</h2>
+                <textarea id="skills" placeholder="Your Skills" rows="4" required></textarea>
+               <h2>Projects</h2>
+               <textarea id="projects" placeholder="Your projects" rows="4" required></textarea>
+                <h2>Achievements</h2>
+                <textarea id="achievements" placeholder="Your Achievements" rows="4" required></textarea>
+                <h2>Additional Details</h2>
+                <textarea id="additional_details" placeholder="You can tell about your hobbies and other activities" rows="4"></textarea>
+            </section>
+            <button type="button" aria-label="button" onclick="getResume()">Generate Resume</button>
+            <button type="button" aria-label="button" onclick="downloadPDF()">Download PDF</button>
+        </form>
+    </div>
+
+    <!-- Live Preview of the Resume -->
+    <div class="resume-preview" id="resume-content">
+        <h2>Live Preview</h2>
+         <div class="resume-section">
+            <span class="label">Photo: </span><span id="preview-photo"></span>
+        </div>
+        <div class="resume-section">
+            <span class="label">Name: </span><span id="preview-name"></span>
+        </div> 
+        <div class="resume-section">
+            <span class="label">Email: </span><span id="preview-email"></span>
+        </div>
+        <div class="resume-section">
+            <span class="label">Phone: </span><span id="preview-phone"></span>
+        </div>
+        <hr>
+        <article class="resume-section">
+            <span class="label">Objective: </span><span id="preview-objective"></span>
+        </article>
+        <article class="resume-section">
+            <span class="label">Experience: </span><span id="preview-experience"></span>
+        </article>
+        <article class="resume-section">
+            <span class="label">Education: </span><span id="preview-education"></span>
+        </article>
+        <article class="resume-section">
+            <span class="label">Skills: </span><span id="preview-skills"></span>
+        </article>
+        <article class="resume-section">
+            <span class="label">Projects: </span><span id="preview-projects"></span>
+        </article>
+        <article class="resume-section">
+            <span class="label">Achievements: </span><span id="preview-achievements"></span>
+        </article>
+        <article class="resume-section">
+            <span class="label">Additional Details: </span><span id="preview-additional-details"></span>
+        </article>
+    </div>
 </main>
-    
+
+<script>
+  function getResume() {
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const objective = document.getElementById('objective').value;
+    const experience = document.getElementById('experience').value;
+    const education = document.getElementById('education').value;
+    const skills = document.getElementById('skills').value;
+    const projects = document.getElementById('projects').value;
+    const achievements = document.getElementById('achievements').value;
+    const additionalDetails = document.getElementById('additional_details').value;
+
+    // Preview the data
+    document.getElementById('preview-name').textContent = name;
+    document.getElementById('preview-email').textContent = email;
+    document.getElementById('preview-phone').textContent = phone;
+    document.getElementById('preview-objective').textContent = objective;
+    document.getElementById('preview-experience').textContent = experience;
+    document.getElementById('preview-education').textContent = education;
+    document.getElementById('preview-skills').textContent = skills;
+    document.getElementById('preview-projects').textContent = projects;
+    document.getElementById('preview-achievements').textContent = achievements;
+    document.getElementById('preview-additional-details').textContent = additionalDetails;
+
+    // Handle photo preview
+    const photoInput = document.getElementById('photo');
+    const photoPreview = document.getElementById('preview-photo');
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      photoPreview.innerHTML = `<img src="${e.target.result}" alt="Photo">`;
+    };
+    if (photoInput.files && photoInput.files[0]) {
+      reader.readAsDataURL(photoInput.files[0]);
+    }
+  }
+async function downloadPDF() {
+    const { jsPDF } = window.jspdf;
+
+    const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: 'a4',
+    });
+
+    const resumeElement = document.getElementById('resume-content');
+
+    // Use html2canvas to capture the resume content
+    const canvas = await html2canvas(resumeElement, { scale: 2 });
+
+    const imgData = canvas.toDataURL('image/png');
+
+    // Calculate dimensions to fit the A4 page
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    pdf.save('resume.pdf');
+}
+
+    document.querySelectorAll('.section-header').forEach(header => {
+        header.addEventListener('click', () => {
+            const section = header.nextElementSibling;
+            section.style.display = (section.style.display === 'none') ? 'block' : 'none';
+        });
+    });
+</script> 
+<h2 class="section-header">Experience</h2>
+<div class="section-content" style="display: block;">
+    <textarea id="experience"></textarea>
+</div>
+ 
+<!-- Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore vero ex, repellat veritatis ab neque nulla earum sunt, expedita ipsam modi repellendus veniam voluptatibus doloremque saepe quo molestiae beatae tempora. -->
+
 </body>
 </html>
